@@ -1,5 +1,6 @@
 const Hapi = require('@hapi/hapi');
 const { fetchPerson } = require('./external-api');
+const { postPerson } = require('./database')
 
 const init = async() => {
 
@@ -14,7 +15,8 @@ const init = async() => {
         handler: async(request, h) => {
             const param = request.params;
             const personJson = await fetchPerson(param.id)
-            console.log(personJson)
+            const personPayload = { id: param.id, ...personJson }
+            const dbResponse = await postPerson(personPayload)
 
             return h
                 .response(personJson);
