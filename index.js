@@ -33,4 +33,6 @@ process.on('unhandledRejection', (err) => {
     process.exit(1);
 });
 
+//Teste commit
+
 init();
